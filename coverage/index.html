@@ -9,21 +9,29 @@
             <input type="tel" name="phoneNumber">
             <button>Submit</button>
         </form>
+        <ul id="listOfUsers"></ul>
         <script>
             function toSaveLocalStorage(event){
                 event.preventDefault();
                 const name = event.target.username.value;
                 const email = event.target.emailId.value;
                 const phone = event.target.phoneNumber.value;
-                localStorage.setItem('name', name);
-                localStorage.setItem('email', email);
-                localStorage.setItem('phone', phone);
+                // localStorage.setItem('name', name);
+                // localStorage.setItem('email', email);
+                // localStorage.setItem('phone', phone);
                 const obj = {
                     name,
                     email,
                     phone
                 }
-                localStorage.setItem("userDetails", JSON.stringify(obj));
+                localStorage.setItem(obj.email, JSON.stringify(obj));
+                showNewUserOnScreen(obj)
+            }
+
+            function showNewUserOnScreen(user){
+                const parentNode = document.getElementById('listOfUsers');
+                const childHTML = `<li>${user.name}  --  ${user.email}</li>`
+                parentNode.innerHTML = parentNode.innerHTML + childHTML;
             }
         </script>
     </body>
